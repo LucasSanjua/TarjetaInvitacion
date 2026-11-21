@@ -76,16 +76,21 @@
   .place{margin-top:6px}
   .place-name{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;color:var(--emerald);letter-spacing:.06em}
   .place-sub{font-size:.85rem;letter-spacing:.05em;opacity:.8}
-  .map-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:13px 28px;border-radius:999px;text-decoration:none;
-           color:var(--cream);background:linear-gradient(135deg,var(--emerald-l),var(--emerald) 50%,var(--emerald-d));
-           border:1px solid var(--gold);letter-spacing:.18em;text-transform:uppercase;font-size:.75rem;
-           box-shadow:0 6px 16px rgba(6,64,46,.35);animation:glow 2.4s ease-in-out infinite;transition:transform .15s}
-  .map-btn:active{transform:scale(.95)}
-  .map-btn .pin{display:inline-block;animation:hop 1.2s ease-in-out infinite}
-  @keyframes hop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
-  @keyframes glow{0%{box-shadow:0 6px 16px rgba(6,64,46,.35),0 0 0 0 rgba(201,162,74,.55)}
-                  70%{box-shadow:0 6px 16px rgba(6,64,46,.35),0 0 0 14px rgba(201,162,74,0)}
-                  100%{box-shadow:0 6px 16px rgba(6,64,46,.35),0 0 0 0 rgba(201,162,74,0)}}
+  .map-btn{position:relative;display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:13px 26px;
+           text-decoration:none;color:var(--emerald);border:1px solid var(--emerald);background:transparent;
+           font-family:Lato,sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+           overflow:hidden;transition:color .4s,background .4s}
+  /* segundo marco dorado, como el borde de la carta */
+  .map-btn::before{content:"";position:absolute;inset:3px;border:1px solid var(--gold);opacity:.7;pointer-events:none}
+  /* destello dorado que cruza el botón cada tanto */
+  .map-btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;pointer-events:none;
+           background:linear-gradient(100deg,transparent,rgba(236,213,143,.55),transparent);transform:skewX(-20deg);
+           animation:sheen 4.5s ease-in-out 3s infinite}
+  @keyframes sheen{0%{left:-60%}35%,100%{left:130%}}
+  .map-btn svg{width:15px;height:15px;flex:none;stroke:currentColor;fill:none;stroke-width:1.4;animation:sway 3s ease-in-out infinite;transform-origin:50% 100%}
+  @keyframes sway{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+  .map-btn:hover,.map-btn:active{background:var(--emerald);color:var(--cream)}
+  .map-btn:active{transform:scale(.97)}
   .info em{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--emerald-d)}
 
   /* aparición escalonada del contenido al abrir */
@@ -123,7 +128,8 @@
       <p class="place-sub">“Poeta Marcelo Berbel” · Neuquén</p>
       <a class="map-btn" target="_blank" rel="noopener"
          href="https://www.google.com/maps/search/?api=1&query=EPET+20+Poeta+Marcelo+Berbel+Neuqu%C3%A9n">
-        <span class="pin">📍</span> Cómo llegar
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        Cómo llegar
       </a>
     </div>
     <p class="info"><em>Tu presencia es mi mejor regalo</em></p>
