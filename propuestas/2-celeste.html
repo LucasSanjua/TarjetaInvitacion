@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Egreso Mateo · Cielo Celeste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root{ --sky1:#7cc6f2; --sky2:#d9f0ff; --blue:#1f6fb2; --sun:#ffd166; --white:#fff; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;font-family:Fredoka,sans-serif;color:var(--blue);overflow-x:hidden;
+       background:linear-gradient(180deg,var(--sky1),var(--sky2) 75%)}
+  canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+  .cloud{position:fixed;background:#fff;border-radius:100px;opacity:.85;z-index:0;animation:drift linear infinite}
+  .cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+  .cloud::before{width:55%;height:160%;left:15%;top:-70%}
+  .cloud::after{width:40%;height:130%;right:12%;top:-45%}
+  @keyframes drift{from{transform:translateX(-40vw)}to{transform:translateX(140vw)}}
+  .sun{position:fixed;top:-40px;right:-40px;width:150px;height:150px;border-radius:50%;background:var(--sun);
+       box-shadow:0 0 60px 20px rgba(255,209,102,.6);animation:spin 30s linear infinite;z-index:0}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .card{position:relative;z-index:2;max-width:420px;margin:0 auto;padding:110px 20px 50px;text-align:center}
+  .capwrap{position:absolute;left:50%;top:20px;transform:translateX(-50%)}
+  .cap{width:92px;animation:toss 2.2s cubic-bezier(.3,.7,.4,1) .2s both}
+  @keyframes toss{0%{transform:translateY(260px) rotate(0) scale(.6);opacity:0}
+                  55%{transform:translateY(-40px) rotate(380deg) scale(1.1);opacity:1}
+                  100%{transform:translateY(0) rotate(360deg) scale(1)}}
+  .box{background:rgba(255,255,255,.88);border-radius:28px;padding:34px 20px;box-shadow:0 20px 40px rgba(31,111,178,.2);
+       animation:pop .8s cubic-bezier(.2,1.4,.4,1) 1s both}
+  @keyframes pop{from{transform:scale(.7);opacity:0}to{transform:none;opacity:1}}
+  .hey{font-size:1rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+  .script{font-family:Pacifico,cursive;font-size:2.1rem;color:#f28c38;margin:6px 0}
+  h1{font-size:3.4rem;font-weight:700;line-height:1;letter-spacing:.04em}
+  h1 span{display:inline-block;animation:bounce 1.6s ease-in-out infinite}
+  @keyframes bounce{0%,100%{transform:translateY(0)}30%{transform:translateY(-10px)}}
+  .name{font-size:1.5rem;font-weight:600;margin:16px 0;color:#0f4c81}
+  .pill{display:inline-flex;gap:10px;align-items:center;background:var(--blue);color:#fff;border-radius:999px;padding:10px 20px;font-weight:600;font-size:1.05rem}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:22px 0}
+  .grid div{background:var(--sky2);border-radius:16px;padding:10px 0}
+  .grid b{display:block;font-size:1.5rem}
+  .grid span{font-size:.7rem;text-transform:uppercase;opacity:.7}
+  .info{line-height:1.7}
+  .btn{display:inline-block;margin-top:20px;padding:14px 28px;border-radius:999px;background:#f28c38;color:#fff;text-decoration:none;font-weight:700;
+       box-shadow:0 6px 0 #c96a1f;transition:transform .1s}
+  .btn:active{transform:translateY(4px);box-shadow:0 2px 0 #c96a1f}
+  .again{margin-top:14px;font-size:.85rem;opacity:.7;background:none;border:0;color:inherit;font-family:inherit;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="sun"></div>
+<div class="cloud" style="top:14%;width:120px;height:38px;animation-duration:38s;animation-delay:-10s"></div>
+<div class="cloud" style="top:42%;width:90px;height:28px;animation-duration:28s;animation-delay:-20s"></div>
+<div class="cloud" style="top:70%;width:150px;height:46px;animation-duration:46s;animation-delay:-5s"></div>
+<canvas id="fx"></canvas>
+<main class="card">
+  <div class="capwrap">
+    <svg class="cap" viewBox="0 0 100 80"><polygon points="50,5 98,28 50,50 2,28" fill="#123a63"/>
+      <path d="M24 38v18c0 8 52 8 52 0V38L50 50z" fill="#1f4f80"/>
+      <path d="M50 28 L86 33 V58" stroke="#ffd166" stroke-width="3" fill="none"/><circle cx="86" cy="62" r="5" fill="#ffd166"/></svg>
+  </div>
+  <section class="box">
+    <p class="hey">¡Llegó el gran día!</p>
+    <p class="script">Festejemos mi</p>
+    <h1 id="title">EGRESO</h1>
+    <p class="name">Mateo David<br>Rodríguez Zamora</p>
+    <p class="pill">📅 Martes 1 de Diciembre</p>
+    <div class="grid">
+      <div><b id="d">0</b><span>días</span></div><div><b id="h">0</b><span>hs</span></div>
+      <div><b id="m">0</b><span>min</span></div><div><b id="s">0</b><span>seg</span></div>
+    </div>
+    <p class="info">🕘 21:00 hs<br>📍 Lugar a confirmar</p>
+    <a class="btn" href="#">¡Confirmo que voy! 🎉</a><br>
+    <button class="again" onclick="burst()">Tirar más papelitos</button>
+  </section>
+</main>
+<script>
+  // Letras que rebotan en cascada
+  title.innerHTML=[...title.textContent].map((l,i)=>`<span style="animation-delay:${i*.12}s">${l}</span>`).join('');
+  const target=new Date('2026-12-01T21:00:00');
+  function tick(){let t=Math.max(0,target-new Date());d.textContent=Math.floor(t/864e5);h.textContent=Math.floor(t/36e5)%24;m.textContent=Math.floor(t/6e4)%60;s.textContent=Math.floor(t/1e3)%60}
+  tick();setInterval(tick,1000);
+
+  // Confeti
+  const c=fx,x=c.getContext('2d');let W,H,P=[];const cols=['#f28c38','#ffd166','#1f6fb2','#ef476f','#06d6a0','#fff'];
+  function size(){W=c.width=innerWidth;H=c.height=innerHeight}size();addEventListener('resize',size);
+  function burst(){for(let i=0;i<160;i++)P.push({x:W/2,y:H*.3,vx:(Math.random()-.5)*14,vy:Math.random()*-14-4,r:Math.random()*360,vr:(Math.random()-.5)*12,
+    w:Math.random()*8+5,h:Math.random()*5+3,c:cols[i%cols.length],life:0})}
+  (function loop(){x.clearRect(0,0,W,H);P=P.filter(p=>p.y<H+20);
+    P.forEach(p=>{p.vy+=.28;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;x.save();x.translate(p.x,p.y);x.rotate(p.r*Math.PI/180);
+      x.fillStyle=p.c;x.fillRect(-p.w/2,-p.h/2,p.w,p.h*Math.abs(Math.cos(p.r/20)));x.restore()});
+    requestAnimationFrame(loop)})();
+  setTimeout(burst,1500);
+</script>
+</body>
+</html>

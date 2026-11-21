@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Egreso Mateo · Neón Fiesta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#0d0221; --pink:#ff2bd6; --cyan:#00f0ff; --violet:#7b2cff; --text:#f3e9ff; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;background:linear-gradient(180deg,#0d0221 0%,#26084d 55%,#3d0b5e 100%);color:var(--text);font-family:Outfit,sans-serif;overflow-x:hidden}
+  /* Sol synthwave */
+  .sun{position:fixed;left:50%;bottom:30vh;width:240px;height:240px;transform:translateX(-50%);border-radius:50%;z-index:0;
+       background:linear-gradient(180deg,#ffd319,#ff2bd6 70%);filter:drop-shadow(0 0 40px #ff2bd6);
+       -webkit-mask:repeating-linear-gradient(180deg,#000 0 14px,transparent 14px 18px);mask:repeating-linear-gradient(180deg,#000 0 14px,transparent 14px 18px);opacity:.55}
+  /* Piso cuadriculado en movimiento */
+  .floor{position:fixed;left:-50%;right:-50%;bottom:0;height:32vh;z-index:0;perspective:220px;overflow:hidden}
+  .floor::before{content:"";position:absolute;inset:-100% 0 0 0;transform:rotateX(70deg);transform-origin:bottom;
+       background-image:linear-gradient(var(--pink) 2px,transparent 2px),linear-gradient(90deg,var(--pink) 2px,transparent 2px);
+       background-size:60px 60px;animation:run 1.2s linear infinite;opacity:.7}
+  @keyframes run{to{background-position:0 60px}}
+  .card{position:relative;z-index:1;max-width:420px;margin:0 auto;padding:60px 22px 40vh;text-align:center}
+  .tag{display:inline-block;border:1px solid var(--cyan);color:var(--cyan);padding:6px 14px;border-radius:4px;letter-spacing:.3em;font-size:.72rem;
+       text-shadow:0 0 6px var(--cyan);box-shadow:0 0 10px rgba(0,240,255,.5),inset 0 0 10px rgba(0,240,255,.3)}
+  .lead{margin-top:28px;font-weight:300;font-size:1.1rem;letter-spacing:.15em;text-transform:uppercase}
+  h1{font-family:Monoton,cursive;font-weight:400;font-size:3.5rem;margin:10px 0;color:#fff;
+     text-shadow:0 0 6px #fff,0 0 14px var(--pink),0 0 30px var(--pink),0 0 60px var(--pink);animation:flicker 4s infinite}
+  @keyframes flicker{0%,18%,22%,62%,64%,100%{opacity:1}20%,63%{opacity:.35}}
+  .name{font-weight:800;font-size:1.7rem;line-height:1.15;color:var(--cyan);text-shadow:0 0 10px rgba(0,240,255,.8)}
+  .date{margin:26px auto 0;padding:18px;border:2px solid var(--pink);border-radius:14px;max-width:300px;
+        box-shadow:0 0 14px var(--pink),inset 0 0 14px rgba(255,43,214,.4);animation:breathe 2.5s ease-in-out infinite}
+  @keyframes breathe{50%{box-shadow:0 0 28px var(--pink),inset 0 0 22px rgba(255,43,214,.6)}}
+  .date b{display:block;font-size:2.6rem;font-weight:800;line-height:1}
+  .date span{letter-spacing:.25em;text-transform:uppercase;font-size:.8rem}
+  .count{display:flex;justify-content:center;gap:8px;margin:24px 0}
+  .count div{min-width:68px;padding:10px 4px;background:rgba(123,44,255,.25);border:1px solid var(--violet);border-radius:10px}
+  .count b{display:block;font-size:1.6rem;font-weight:800;color:#fff;text-shadow:0 0 8px var(--violet)}
+  .count span{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  .info{line-height:1.8;font-weight:300}
+  .btn{display:inline-block;margin-top:22px;padding:14px 30px;border-radius:999px;text-decoration:none;color:#fff;font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;
+       background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));background-size:200%;animation:slide 3s linear infinite;box-shadow:0 0 20px rgba(255,43,214,.6)}
+  @keyframes slide{to{background-position:200%}}
+  .in{opacity:0;animation:zoom .7s ease forwards}
+  @keyframes zoom{from{opacity:0;transform:scale(1.4);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+</style>
+</head>
+<body>
+<div class="sun"></div>
+<div class="floor"></div>
+<main class="card">
+  <span class="tag in" style="animation-delay:.1s">PROMO 2026</span>
+  <p class="lead in" style="animation-delay:.4s">Se viene la fiesta de mi</p>
+  <h1 class="in" style="animation-delay:.7s">EGRESO</h1>
+  <p class="name in" style="animation-delay:1s">MATEO DAVID<br>RODRÍGUEZ ZAMORA</p>
+  <div class="date in" style="animation-delay:1.3s"><span>Martes</span><b>01 · 12</b><span>2026 · 21:00 hs</span></div>
+  <div class="count in" style="animation-delay:1.6s">
+    <div><b id="d">0</b><span>días</span></div><div><b id="h">0</b><span>hs</span></div>
+    <div><b id="m">0</b><span>min</span></div><div><b id="s">0</b><span>seg</span></div>
+  </div>
+  <p class="info in" style="animation-delay:1.8s">📍 Lugar a confirmar<br>🎧 Música · Baile · Amigos</p>
+  <a class="btn in" style="animation-delay:2s" href="#">Confirmar asistencia</a>
+</main>
+<script>
+  const target=new Date('2026-12-01T21:00:00');
+  function tick(){let t=Math.max(0,target-new Date());d.textContent=Math.floor(t/864e5);h.textContent=Math.floor(t/36e5)%24;m.textContent=Math.floor(t/6e4)%60;s.textContent=Math.floor(t/1e3)%60}
+  tick();setInterval(tick,1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Egreso Mateo · Sobre Botánico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Parisienne&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{ --sage:#8fa98a; --sage-d:#4f6b4c; --cream:#f8f3e9; --terra:#c97b5a; --ink:#3b3a33; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;background:var(--sage);font-family:Lato,sans-serif;color:var(--ink);overflow-x:hidden;
+       background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.25),transparent 40%),radial-gradient(circle at 80% 90%,rgba(0,0,0,.12),transparent 40%)}
+  .leaf{position:fixed;top:-40px;font-size:22px;z-index:0;animation:fall linear infinite;opacity:.8}
+  @keyframes fall{to{transform:translate(60px,110vh) rotate(540deg)}}
+
+  /* ---- Sobre ---- */
+  .stage{position:fixed;inset:0;display:grid;place-items:center;z-index:5;transition:opacity .8s .9s}
+  .stage.open{opacity:0;pointer-events:none}
+  .env{position:relative;width:min(86vw,340px);aspect-ratio:1.45;background:#efe6d3;border-radius:6px;box-shadow:0 20px 40px rgba(0,0,0,.25);cursor:pointer;animation:wiggle 2.5s ease-in-out infinite}
+  .stage.open .env{animation:none}
+  @keyframes wiggle{0%,80%,100%{transform:rotate(0)}85%{transform:rotate(-3deg)}90%{transform:rotate(3deg)}95%{transform:rotate(-2deg)}}
+  .env .pocket{position:absolute;inset:0;border-radius:6px;z-index:3;
+      background:linear-gradient(to top right,#e6dbc4 50%,transparent 50.5%) left/50% 100% no-repeat,linear-gradient(to top left,#e0d4ba 50%,transparent 50.5%) right/50% 100% no-repeat}
+  .env .flap{position:absolute;left:0;right:0;top:0;height:60%;z-index:4;transform-origin:top;transition:transform .8s ease;
+      background:#d9cbb0;clip-path:polygon(0 0,100% 0,50% 100%)}
+  .stage.open .flap{transform:rotateX(180deg);z-index:1}
+  .seal{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:5;width:62px;height:62px;border-radius:50%;
+      background:radial-gradient(circle at 35% 35%,#e09a7a,var(--terra) 60%,#9c5136);display:grid;place-items:center;color:#fff3e8;
+      font-family:Parisienne,cursive;font-size:1.6rem;box-shadow:0 3px 8px rgba(0,0,0,.3);transition:opacity .3s}
+  .stage.open .seal{opacity:0}
+  .hint{position:absolute;bottom:-46px;left:0;right:0;text-align:center;color:var(--cream);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;animation:blink 1.6s infinite}
+  @keyframes blink{50%{opacity:.4}}
+
+  /* ---- Tarjeta ---- */
+  .card{position:relative;z-index:2;max-width:420px;margin:32px auto;padding:0 18px;opacity:0;transform:translateY(80px);transition:all 1s cubic-bezier(.2,.8,.2,1) 1s}
+  .card.show{opacity:1;transform:none}
+  .paper{background:var(--cream);border-radius:4px;padding:44px 22px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.2);position:relative;overflow:hidden}
+  .paper::before,.paper::after{content:"🌿";position:absolute;font-size:64px;opacity:.9}
+  .paper::before{top:-14px;left:-10px;transform:rotate(-30deg)}
+  .paper::after{bottom:-14px;right:-10px;transform:rotate(150deg)}
+  .over{letter-spacing:.35em;font-size:.7rem;text-transform:uppercase;color:var(--sage-d)}
+  .script{font-family:Parisienne,cursive;font-size:2.2rem;color:var(--terra);margin-top:14px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:3.4rem;letter-spacing:.12em;color:var(--sage-d);line-height:1}
+  .name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;margin:20px 0;line-height:1.2}
+  .line{height:1px;width:70%;margin:0 auto;background:var(--sage)}
+  .date{font-family:'Cormorant Garamond',serif;font-size:1.25rem;margin:18px 0;line-height:1.5}
+  .date b{font-size:2.6rem;color:var(--terra);display:block;line-height:1}
+  .count{display:flex;justify-content:center;gap:14px;margin:18px 0;font-family:'Cormorant Garamond',serif}
+  .count b{display:block;font-size:1.8rem;color:var(--sage-d)}
+  .count span{font-family:Lato;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase}
+  .info{font-size:.92rem;line-height:1.7}
+  .btn{display:inline-block;margin-top:22px;padding:13px 28px;border:1px solid var(--sage-d);color:var(--sage-d);text-decoration:none;letter-spacing:.2em;text-transform:uppercase;font-size:.72rem;transition:.3s}
+  .btn:hover,.btn:active{background:var(--sage-d);color:var(--cream)}
+</style>
+</head>
+<body>
+<div class="stage" id="stage" onclick="openIt()">
+  <div class="env">
+    <div class="flap"></div><div class="pocket"></div><div class="seal">M</div>
+    <p class="hint">Tocá el sobre para abrirlo</p>
+  </div>
+</div>
+
+<main class="card" id="card">
+  <div class="paper">
+    <p class="over">Promoción 2026</p>
+    <p class="script">Con alegría te invito a mi</p>
+    <h1>EGRESO</h1>
+    <p class="name">Mateo David<br>Rodríguez Zamora</p>
+    <div class="line"></div>
+    <p class="date">Martes<b>1 de Diciembre</b>2026 · 21:00 hs</p>
+    <div class="line"></div>
+    <div class="count">
+      <div><b id="d">0</b><span>días</span></div><div><b id="h">0</b><span>horas</span></div>
+      <div><b id="m">0</b><span>min</span></div><div><b id="s">0</b><span>seg</span></div>
+    </div>
+    <p class="info">📍 Lugar a confirmar<br>Tu presencia es mi mejor regalo</p>
+    <a class="btn" href="#">Confirmar asistencia</a>
+  </div>
+</main>
+<script>
+  function openIt(){ stage.classList.add('open'); card.classList.add('show'); leaves(); }
+  function leaves(){ const e=['🍃','🌿','🍂','🌸'];
+    for(let i=0;i<14;i++){ const l=document.createElement('span'); l.className='leaf'; l.textContent=e[i%e.length];
+      l.style.left=Math.random()*100+'vw'; l.style.animationDuration=(8+Math.random()*8)+'s'; l.style.animationDelay=(Math.random()*-12)+'s';
+      document.body.appendChild(l); } }
+  const target=new Date('2026-12-01T21:00:00');
+  function tick(){let t=Math.max(0,target-new Date());d.textContent=Math.floor(t/864e5);h.textContent=Math.floor(t/36e5)%24;m.textContent=Math.floor(t/6e4)%60;s.textContent=Math.floor(t/1e3)%60}
+  tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
