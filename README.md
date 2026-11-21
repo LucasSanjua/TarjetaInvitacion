@@ -8,14 +8,14 @@ Es HTML/CSS/JS puro: no necesita instalar nada.
 
 ## Publicar en GitHub Pages
 
-1. Crear un repositorio público en GitHub (por ejemplo `egreso-mateo`).
+1. Crear un repositorio público en GitHub (`TarjetaInvitacion`).
 2. Subir este proyecto:
    ```bash
-   git remote add origin https://github.com/<usuario>/egreso-mateo.git
+   git remote add origin https://github.com/LucasSanjua/TarjetaInvitacion.git
    git push -u origin main
    ```
 3. En GitHub: **Settings → Pages → Source: Deploy from a branch → `main` / `(root)`** y guardar.
-4. En un minuto queda online en `https://<usuario>.github.io/egreso-mateo/`.
+4. En un minuto queda online en https://lucassanjua.github.io/TarjetaInvitacion/.
 
 ## Cosas para editar en `index.html`
 
