@@ -19,6 +19,6 @@ Es HTML/CSS/JS puro: no necesita instalar nada.
 
 ## Cosas para editar en `index.html`
 
-- **Lugar:** buscar `Lugar a confirmar`.
+- **Lugar y botón "Cómo llegar":** buscar `place` (el link de Google Maps está en `map-btn`).
 - **Hora / fecha de la cuenta regresiva:** buscar `2026-12-01T19:00:00-03:00`.
 - **Colores:** variables al inicio del `<style>` (`--emerald`, `--gold`, …).
